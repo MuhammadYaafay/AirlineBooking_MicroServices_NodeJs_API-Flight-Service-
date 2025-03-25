@@ -1,5 +1,4 @@
 //for versioning the api v1, v2
-
 const express = require("express");
 const router = express.Router();
 const { InfoController } = require("../../controllers");
