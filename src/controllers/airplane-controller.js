@@ -12,9 +12,7 @@ async function createAirplane(req, res) {
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;
-    return res
-      .status(error.statusCode || StatusCodes.BAD_REQUEST)
-      .json(ErrorResponse);
+    return res.status(error.statusCode).json(ErrorResponse);
   }
 }
 
@@ -51,9 +49,27 @@ async function destroyAirplane(req, res) {
   }
 }
 
+async function updateAirplane(req, res) {
+  try {
+    const airplane = await AirplaneService.updateAirplane({
+      where: { id: req.params.id },
+      data: {
+        modelNumber: req.body.modelNumber,
+        capacity: req.body.capacity,
+      },
+    });
+    SuccessResponse.data = airplane;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createAirplane,
   getAirplanes,
   getAirplane,
   destroyAirplane,
+  updateAirplane,
 };

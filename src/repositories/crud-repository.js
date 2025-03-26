@@ -9,6 +9,9 @@ class CrudRepository {
 
   async create(data) {
     const response = await this.model.create(data);
+    if(!response) {
+      throw new AppError("Failed to create new resource", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
     return response;
   }
 
@@ -39,7 +42,6 @@ class CrudRepository {
 
   async update(id, data) {
     //data should be object
-
     const response = await this.model.update(data, {
       where: {
         id: id,
