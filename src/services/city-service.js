@@ -23,6 +23,8 @@ async function createCity(data) {
   }
 }
 
+// update and delete
+
 module.exports = {
   createCity,
 };
