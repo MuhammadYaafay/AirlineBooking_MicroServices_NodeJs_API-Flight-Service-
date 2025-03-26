@@ -6,9 +6,9 @@ const AppError = require("../utils/errors/app-error");
 
 const airplaneRepository = new AirplaneRepository();
 
-function createAirplane(data) {
+async function createAirplane(data) {
   try {
-    const airplane = airplaneRepository.create(data);
+    const airplane = await airplaneRepository.create(data);
     return airplane;
   } catch (error) {
     if (error.name == "SequelizeValidationError") {
