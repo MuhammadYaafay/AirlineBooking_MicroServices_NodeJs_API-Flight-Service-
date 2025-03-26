@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const { AirplaneService } = require("../services"); // services will handle all operations controller will structure the response
+const { AirplaneService } = require("../services"); // services will handle all operations while controller will structure the response
 const { SuccessResponse, ErrorResponse } = require("../utils/common");
 
 async function createAirplane(req, res) {
@@ -16,6 +16,18 @@ async function createAirplane(req, res) {
   }
 }
 
+async function getAirplanes(req, res) {
+  try{
+      const airplanes = await AirplaneService.getAirplanes();
+      SuccessResponse.data = airplanes;
+      return res.status(StatusCodes.OK).json(SuccessResponse);
+  }catch(err) {
+    ErrorResponse.error = err;
+    return res.status(err.statusCode).json(ErrorResponse);
+  }
+}
+
 module.exports = {
   createAirplane,
+  getAirplanes,
 };
