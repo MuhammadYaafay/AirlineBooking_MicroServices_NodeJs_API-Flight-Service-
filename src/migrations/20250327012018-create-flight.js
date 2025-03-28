@@ -38,12 +38,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model  : 'Airports',
+          model: 'Airports',
           key: 'code'
         },
         onDelete: "CASCADE"
-
-
+      },
+      departureTime: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
       arrivalTime: {
         type: Sequelize.DATE,
