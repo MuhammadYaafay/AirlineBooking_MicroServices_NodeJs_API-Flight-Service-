@@ -6,11 +6,10 @@ class FlightRepository extends CrudRepository {
     super(Flight); //call constru of parent class
   }
 
-  async getAllFlights(filter){
-    const response = await Flight.findALl({
-      where: {
-        
-      }
+  async getAllFlights(filter, sort) {
+    const response = await Flight.findAll({
+      where: filter,
+      order: sort
     })
     return response;
   }
